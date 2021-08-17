@@ -26,6 +26,24 @@ public class ServerApiController {
 //    &start=1
 //    &sort=random
 
+    @GetMapping("/test-flask")
+    public String testFlask(){
+        URI uri = UriComponentsBuilder
+                .fromUriString("http://3.38.103.192")
+                .path("/test-spring")
+                .encode()
+                .build()
+                .toUri();
+        RestTemplate restTemplate = new RestTemplate();
+        RequestEntity<Void> req = RequestEntity
+                .get(uri)
+                .build();
+        System.out.println(uri);
+        ResponseEntity<String> result = restTemplate.exchange(req, String.class);
+        return result.getBody();
+    }
+
+
     @GetMapping("/naver")
     public String naver(){
 
